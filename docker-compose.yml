@@ -30,7 +30,8 @@ services:
       - TZ=America/New_York
     restart: unless-stopped
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     volumes:
       - ./config.toml:/listmonk/config.toml
     command: ["./listmonk", "--config", "config.toml"]
