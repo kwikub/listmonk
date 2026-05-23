@@ -17,6 +17,8 @@ services:
       interval: 10s
       timeout: 5s
       retries: 6
+    volumes:
+      - listmonk-data:/var/lib/postgresql/data
 
   app:
     image: listmonk/listmonk:latest
@@ -25,7 +27,7 @@ services:
     networks:
       - listmonk
     environment:
-      - TZ=Etc/UTC
+      - TZ=America/New_York
     restart: unless-stopped
     depends_on:
       - db
@@ -35,3 +37,6 @@ services:
 
 networks:
   listmonk:
+
+volumes:
+  listmonk-data:
