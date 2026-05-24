@@ -27,7 +27,7 @@ services:
     networks:
       - listmonk
     environment:
-      - TZ=America/New_York
+      - TZ=Europe/London
     restart: unless-stopped
     depends_on:
       db:
