@@ -17,6 +17,9 @@ GOMOD=$(GOCMD) mod
 YARN=yarn
 FRONTEND_DIR=frontend
 
+# Default config file path (override with: make run CONFIG=path/to/config.toml)
+CONFIG=config.toml
+
 .PHONY: all build build-backend build-frontend clean test deps run dev
 
 ## Default target: build everything
@@ -50,7 +53,7 @@ clean:
 
 ## Run the application (requires a config file)
 run: build-backend
-	./$(BINARY) --config config.toml
+	./$(BINARY) --config $(CONFIG)
 
 ## Start backend in dev/watch mode (requires air: github.com/cosmtrek/air)
 dev-backend:
@@ -70,7 +73,7 @@ config:
 
 ## Run database migrations
 migrate: build-backend
-	./$(BINARY) --config config.toml --upgrade
+	./$(BINARY) --config $(CONFIG) --upgrade
 
 ## Install the binary to $GOPATH/bin
 install:
