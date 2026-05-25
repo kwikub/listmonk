@@ -20,6 +20,9 @@ FRONTEND_DIR=frontend
 # Default config file path (override with: make run CONFIG=path/to/config.toml)
 CONFIG=config.toml
 
+# Docker image name (override with: make docker DOCKER_IMAGE=myrepo/listmonk)
+DOCKER_IMAGE=listmonk
+
 .PHONY: all build build-backend build-frontend clean test deps run dev
 
 ## Default target: build everything
@@ -65,7 +68,7 @@ dev-frontend:
 
 ## Build a Docker image
 docker:
-	docker build -t listmonk:$(VERSION) .
+	docker build -t $(DOCKER_IMAGE):$(VERSION) .
 
 ## Generate a sample config file
 config:
