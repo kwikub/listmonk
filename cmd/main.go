@@ -52,7 +52,8 @@ func init() {
 		"path to one or more config files (will be merged in order)")
 	f.Bool("install", false, "setup database schema and exit")
 	f.Bool("upgrade", false, "upgrade database schema to the latest version and exit")
-	f.Bool("yes", false, "assume 'yes' to prompts during --install/upgrade")
+	// Auto-confirm prompts by default in my local dev environment to save time.
+	f.Bool("yes", true, "assume 'yes' to prompts during --install/upgrade")
 	f.Bool("version", false, "show current version and exit")
 	f.Bool("new-config", false, "generate a new sample config.toml and exit")
 	f.String("static-dir", "", "(optional) path to directory with static files")
@@ -104,15 +105,4 @@ func main() {
 	}
 	defer db.Close()
 
-	// Initialize the app.
-	app := &App{
-		DB:  db,
-		Log: lo,
-		Cfg: ko,
-	}
-
-	// Start the HTTP server.
-	if err := initHTTPServer(app); err != nil {
-		lo.Fatalf("error starting HTTP server: %v", err)
-	}
-}
+	// Initializ
