@@ -46,7 +46,9 @@ func init() {
 		os.Exit(0)
 	}
 
-	f.StringSlice("config", []string{"config.toml"},
+	// Default config paths include both config.toml and a local override file,
+	// making it easy to keep personal settings without modifying the main config.
+	f.StringSlice("config", []string{"config.toml", "config.local.toml"},
 		"path to one or more config files (will be merged in order)")
 	f.Bool("install", false, "setup database schema and exit")
 	f.Bool("upgrade", false, "upgrade database schema to the latest version and exit")
